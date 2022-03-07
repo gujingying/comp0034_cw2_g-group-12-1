@@ -14,6 +14,7 @@ setup(
         'flask-login',
         'flask-sqlalchemy',
         'flask-wtf',
-        'dash-bootstrap-components'
+        'dash-bootstrap-components',
+        'dash-daq',
     ],
 )

@@ -26,7 +26,7 @@ data.process_data_for_area(area, start, end)
 # Create the figures
 
 # First map showing the location of cities (scatter mapbox)
-df = pd.read_csv("data/min-max-avg.csv")
+df = pd.read_csv("../data/min-max-avg.csv")
 
 mapbox_token = "pk.eyJ1Ijoic3RlcGhhbmllMDYyNSIsImEiOiJja3plcDl3NTQwa2xoMzFtcXdtMGx4Z3U4In0.HJZkpBQj0blh5xUoXXR-VA"
 
@@ -226,9 +226,9 @@ def init_dashboard(flask_app):
 def init_callbacks(dash_app):
     # Callback function of the density heat map
     @dash_app.callback(
-        [Output(component_id='output-container-date-picker-single', component_property='children'),
-         Output(component_id='mapbox-heatmap', component_property='figure')],
-        [Input('map-date-picker-single', component_property='date')])
+        [Output('output-container-date-picker-single', 'children'),
+         Output('mapbox-heatmap', 'figure')],
+        [Input('map-date-picker-single', 'date')])
     def update_map(date_slctd):
         container = ''
 
@@ -310,7 +310,7 @@ def init_callbacks(dash_app):
                     ]),
                 ]),
             ])
-            return card
+        return card
 
         # Callback function of the comment for the gauge chart
 
@@ -363,4 +363,3 @@ def init_callbacks(dash_app):
                 area_select, start_date, end_date)
         fig_rc = rc.create_chart(area_select, matter_select)
         return fig_rc
-
