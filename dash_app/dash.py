@@ -301,7 +301,7 @@ def init_callbacks(dash_app):
                         html.Br(),
 
                         # First PM2.5 gauge chart
-                        dbc.Col(width=4, children=[
+                        dbc.Col(width=8, children=[
                             html.Br(),
                             daq.Gauge(id='chart1',
                                       color={"gradient": True, "ranges": {
@@ -332,7 +332,7 @@ def init_callbacks(dash_app):
                     dbc.Row([
                         #html.H4(area_card, id="card-name", className="card-title"),
 
-                        dbc.Col(width=4, children=[
+                        dbc.Col(width=7, children=[
                             html.Br(),
                             daq.Gauge(id='chart2',
                                       color={"gradient": True, "ranges": {
