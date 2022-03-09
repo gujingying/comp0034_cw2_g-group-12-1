@@ -156,7 +156,6 @@ def init_dashboard(flask_app):
                          dbc.Col(html.Div(id='card1')),
                          dbc.Col(html.Div(id='card2')),
                          # dbc.Col(html.Div("one of the three")),
-
                          ]),
 
                 dbc.Row([
