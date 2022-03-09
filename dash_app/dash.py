@@ -150,7 +150,7 @@ def init_dashboard(flask_app):
                         html.P("As suggested by WHO global air quality guidelines,"
                                "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
                                "the 24-hour mean of PM10 below 45 micrograms is good.",
-                               style={'text-align': 'center'}),`
+                               style={'text-align': 'center'}),
                         html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
                     ]),
                          dbc.Col(html.Div(id='card1')),
