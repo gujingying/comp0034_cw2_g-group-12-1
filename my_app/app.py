@@ -5,7 +5,7 @@ app = create_app(config.DevelopmentConfig)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return 'Hello World 1!'
 
 
 if __name__ == '__main__':
