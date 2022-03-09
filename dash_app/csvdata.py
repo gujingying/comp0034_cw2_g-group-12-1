@@ -25,7 +25,7 @@ def clean_data(df):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv('data/all.csv', parse_dates=['utc'], index_col=['utc'])
+    df = pd.read_csv('../data/all.csv', parse_dates=['utc'], index_col=['utc'])
 
 # London
 df1 = df[df['location_x'].str.match('London')]
