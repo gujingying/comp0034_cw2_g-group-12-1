@@ -64,8 +64,8 @@ def init_dashboard(flask_app):
                          external_stylesheets=external_stylesheets)
 
     # Create layout of the dashboard
-    dash_app.layout = dbc.Container(
-        html.Div([
+    dash_app.layout = dbc.Container([
+        # html.Div([
         html.Br(),
         # First row display the dashboard name
         dbc.Row(dbc.Col(children=[
@@ -128,47 +128,77 @@ def init_dashboard(flask_app):
 
             # Second tab display the daily pollutant matters
             dcc.Tab(label='Daily Matters', children=[
-                dbc.Row([
 
+                dbc.Row([dbc.Col(width=4, children=[
+                        html.Br(),
+                        html.H6('Select Date'),
+                        dcc.DatePickerSingle(
+                            id='my-date-picker-single',
+                            min_date_allowed=date(2021, 1, 1),
+                            max_date_allowed=date(2021, 12, 31),
+                            initial_visible_month=date(2021, 1, 1),
+                            date=date(2021, 1, 1)
+                        ),
+                        html.Br(),
+                        html.Br(),
+                        html.H6("Select Area"),
+                        dcc.Dropdown(id="area-select_d",
+                                     options=[{"label": x, "value": x}
+                                              for x in data.area_list],
+                                     value="London"),
+                        html.Br(),
+                        html.P("As suggested by WHO global air quality guidelines,"
+                               "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
+                               "the 24-hour mean of PM10 below 45 micrograms is good.",
+                               style={'text-align': 'center'}),`
+                        html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
+                    ]),
+                         dbc.Col(html.Div(id='card1')),
+                         dbc.Col(html.Div(id='card2')),
+                         # dbc.Col(html.Div("one of the three")),
+
+                         ]),
+
+                dbc.Row([
                     # Add the date/area pickers in the first column
-                    dbc.Col(width=4, children=[
+                    dbc.Col(children=[
                         html.Br(),
-                        dbc.Row([
-                            html.H6('Select Date'),
-                            dcc.DatePickerSingle(
-                                id='my-date-picker-single',
-                                min_date_allowed=date(2021, 1, 1),
-                                max_date_allowed=date(2021, 12, 31),
-                                initial_visible_month=date(2021, 1, 1),
-                                date=date(2021, 1, 1)
-                            ),
-                        ]),
-                        html.Br(),
-                        dbc.Row([
-                            html.H6("Select Area"),
-                            dcc.Dropdown(id="area-select_d",
-                                         options=[{"label": x, "value": x}
-                                                  for x in data.area_list],
-                                         value="London"),
-                        ]),
+                        # dbc.Row([
+                        #     html.H6('Select Date'),
+                        #     dcc.DatePickerSingle(
+                        #         id='my-date-picker-single',
+                        #         min_date_allowed=date(2021, 1, 1),
+                        #         max_date_allowed=date(2021, 12, 31),
+                        #         initial_visible_month=date(2021, 1, 1),
+                        #         date=date(2021, 1, 1)
+                        #     ),
+                        # ]),
+                        # html.Br(),
+                        # dbc.Row([
+                        #     html.H6("Select Area"),
+                        #     dcc.Dropdown(id="area-select_d",
+                        #                  options=[{"label": x, "value": x}
+                        #                           for x in data.area_list],
+                        #                  value="London"),
+                        # ]),
                         html.Br(),
 
                         # Add the comment area under the pickers
                         html.Br(),
                         html.Br(),
-                        html.P("As suggested by WHO global air quality guidelines,"
-                               "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
-                               "the 24-hour mean of PM10 below 45 micrograms is good.",
-                               style={'text-align': 'center'}),
+                        # html.P("As suggested by WHO global air quality guidelines,"
+                        #        "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
+                        #        "the 24-hour mean of PM10 below 45 micrograms is good.",
+                        #        style={'text-align': 'center'}),
                         html.Br(),
                         html.Br(),
-                        html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
+                        # html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
                     ]),
 
                     # Add the gauge charts in the second column
-                    dbc.Col(children=[
-                        html.Div(id='card')
-                    ]),
+                    # dbc.Col(children=[
+                    #     html.Div(id='card')
+                    # ]),
                 ]),
             ]),
 
@@ -213,12 +243,16 @@ def init_dashboard(flask_app):
                     ]),
 
                     # Add the scatter chart
-                    dcc.Graph(id='recycle-chart', figure=fig_rc)
-                    ]),
+                    #dcc.Graph(id='recycle-chart', figure=fig_rc)
                 ]),
+                dbc.Row(
+                    dbc.Col(children=[
+                        dcc.Graph(id='recycle-chart', figure=fig_rc)
+                    ])
+                )
             ]),
         ]),
-    )
+    ])
 
     init_callbacks(dash_app)
 
@@ -252,7 +286,8 @@ def init_callbacks(dash_app):
 
     # Callback function of the gauge charts
     @dash_app.callback(
-        Output('card', 'children'),
+        Output('card1', 'children'),
+        Output('card2', 'children'),
         Input('my-date-picker-single', 'date'),
         Input("area-select_d", "value"),
     )
@@ -260,14 +295,15 @@ def init_callbacks(dash_app):
         if date_value_card and area_card is not None:
             data.process_data_for_single_day(area_card, date_value_card)
 
-            card = dbc.Card(className="card border-light mb-3", children=[
+            card1 = dbc.Card(className="card border-light mb-3", children=[
                 dbc.CardBody([
                     dbc.Row([
                         html.H4(area_card, id="card-name", className="card-title"),
                         html.Br(),
 
                         # First PM2.5 gauge chart
-                        dbc.Col(width=6, children=[
+                        dbc.Col(width=4, children=[
+                            html.Br(),
                             daq.Gauge(id='chart1',
                                       color={"gradient": True, "ranges": {
                                           "green": [0, 12], "yellow": [12, 35], "red": [35, 60]}},
@@ -287,9 +323,18 @@ def init_callbacks(dash_app):
                             html.H4("{:,.0f}".format(
                                 data.day_data['PM2.5'].mean()), className="card-text text-dark"),
                         ]),
+                    ]),
+                ]),
+            ])
 
-                        # Second PM10 gauge chart
-                        dbc.Col(width=6, children=[
+            # Second PM10 gauge chart
+            card2 = dbc.Card(className="card border-light mb-3", children=[
+                dbc.CardBody([
+                    dbc.Row([
+                        #html.H4(area_card, id="card-name", className="card-title"),
+
+                        dbc.Col(width=4, children=[
+                            html.Br(),
                             daq.Gauge(id='chart2',
                                       color={"gradient": True, "ranges": {
                                           "green": [0, 45], "yellow": [45, 60]}},
@@ -307,12 +352,14 @@ def init_callbacks(dash_app):
                                     className="card-text text-dark"),
                             html.H6("Mean", className="card-title"),
                             html.H4("{:,.0f}".format(
-                                data.day_data['PM10'].mean()), className="card-text text-dark"),
+                                 data.day_data['PM10'].mean()), className="card-text text-dark"),
                         ]),
                     ]),
                 ]),
             ])
-        return card
+
+
+        return card1, card2
 
         # Callback function of the comment for the gauge chart
 

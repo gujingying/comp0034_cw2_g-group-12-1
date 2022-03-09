@@ -5,9 +5,10 @@ from flask_wtf import CSRFProtect
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-#csrf = CSRFProtect()
-csrf_protect = CSRFProtect()
-csrf_protect._exempt_views.add('dash.dash.dispatch')
+csrf = CSRFProtect()
+csrf._exempt_views.add('dash.dash.dispatch')
+#csrf_protect = CSRFProtect()
+#csrf_protect._exempt_views.add('dash.dash.dispatch')
 
 
 def create_app(config_class_name):
@@ -21,7 +22,7 @@ def create_app(config_class_name):
 
     db.init_app(app)
     login_manager.init_app(app)
-    csrf_protect.init_app(app)
+    csrf.init_app(app)
 
 
     with app.app_context():
