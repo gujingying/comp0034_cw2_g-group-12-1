@@ -64,7 +64,8 @@ def init_dashboard(flask_app):
                          external_stylesheets=external_stylesheets)
 
     # Create layout of the dashboard
-    dash_app.layout = html.Div([
+    dash_app.layout = dbc.Container(
+        html.Div([
         html.Br(),
         # First row display the dashboard name
         dbc.Row(dbc.Col(children=[
@@ -213,10 +214,11 @@ def init_dashboard(flask_app):
 
                     # Add the scatter chart
                     dcc.Graph(id='recycle-chart', figure=fig_rc)
-                ])
+                    ]),
+                ]),
             ]),
-        ])
-    ])
+        ]),
+    )
 
     init_callbacks(dash_app)
 
