@@ -1,15 +1,15 @@
 import plotly.graph_objects as go
 
 
-class RecyclingChart:
+class AirQualityChart:
     """ Creates the recycling line chart to be used in the dashboard"""
 
     def __init__(self, data):
         self.data = data
 
     def create_chart(self, area, airtype):
-        area_data = self.data.recycling_area
-        eng_data = self.data.recycling_eng
+        area_data = self.data.AirQuality_area
+        eng_data = self.data.AirQuality_eng
         area = go.Scatter(x=area_data['utc'], y=area_data[airtype],
                           mode='markers',
                           name=area,

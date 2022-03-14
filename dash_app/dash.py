@@ -13,11 +13,11 @@ import dash_daq as daq
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Output, Input
-from dash_app.airdata import RecyclingData
-from dash_app.chart import RecyclingChart
+from dash_app.airdata import AirQualityData
+from dash_app.chart import AirQualityChart
 
 # Prepare the data set
-data = RecyclingData()
+data = AirQualityData()
 area = ''
 start = '2021-1-1'
 end = '2021-12-31'
@@ -48,7 +48,7 @@ fig_mapbox.update_layout(
     mapbox=dict(accesstoken=mapbox_token,
                 center=dict(lat=53.479489, lon=-2.245115), zoom=4.5))
 
-rc = RecyclingChart(data)
+rc = AirQualityChart(data)
 airtype_list = ['PM2.5', 'PM10']
 airtype = 'PM2.5'
 fig_rc = rc.create_chart(area, airtype)
@@ -301,7 +301,7 @@ def init_callbacks(dash_app):
                         html.Br(),
 
                         # First PM2.5 gauge chart
-                        dbc.Col(width=8, children=[
+                        dbc.Col(width=7, children=[
                             html.Br(),
                             daq.Gauge(id='chart1',
                                       color={"gradient": True, "ranges": {
@@ -331,6 +331,7 @@ def init_callbacks(dash_app):
                 dbc.CardBody([
                     dbc.Row([
                         #html.H4(area_card, id="card-name", className="card-title"),
+                        html.Br(),
 
                         dbc.Col(width=7, children=[
                             html.Br(),
