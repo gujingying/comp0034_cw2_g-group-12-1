@@ -29,9 +29,3 @@ class Profile(db.Model):
     bio = db.Column(db.Text)
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-
-class Region(db.Model):
-    __tablename__ = "region"
-    id = db.Column(db.Integer, primary_key=True)
-    region = db.Column(db.Text)
