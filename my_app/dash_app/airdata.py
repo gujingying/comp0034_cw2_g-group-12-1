@@ -18,7 +18,7 @@ class AirQualityData:
         self.get_data()
 
     def get_data(self):
-        datafolder = Path('../data')
+        datafolder = Path('../my_app/dash_app/data')
         csvfile = 'all.csv'
         self.AirQuality= pd.read_csv(datafolder/csvfile)
         self.area_list = self.AirQuality["location_x"].unique().tolist()

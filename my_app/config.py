@@ -4,24 +4,21 @@ from pathlib import Path
 
 class Config(object):
     """ Sets the Flask base configuration that is common to all environments. """
-    DEBUG = False
     SECRET_KEY = 'q44II1qxOHIiuDobNoLLPQ'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(Path(__file__).parent.joinpath('my_example.sqlite'))
+    TESTING = False
     DATA_PATH = Path(__file__).parent.parent.joinpath("data")
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(DATA_PATH.joinpath('example.sqlite'))
 
 
 class ProductionConfig(Config):
-    ENV = 'production'
+    pass
 
 
 class DevelopmentConfig(Config):
-    ENV = 'development'
-    DEBUG = True
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_ECHO = False
 
 
 class TestingConfig(Config):
-    ENV = 'testing'
     TESTING = True
     SQLALCHEMY_ECHO = True

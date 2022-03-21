@@ -13,8 +13,8 @@ import dash_daq as daq
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Output, Input
-from dash_app.airdata import AirQualityData
-from dash_app.chart import AirQualityChart
+from my_app.dash_app.airdata import AirQualityData
+from my_app.dash_app.chart import AirQualityChart
 
 # Prepare the data set
 data = AirQualityData()
@@ -26,7 +26,7 @@ data.process_data_for_area(area, start, end)
 # Create the figures
 
 # First map showing the location of cities (scatter mapbox)
-df = pd.read_csv("../data/min-max-avg.csv")
+df = pd.read_csv("data/min-max-avg.csv")
 
 mapbox_token = "pk.eyJ1Ijoic3RlcGhhbmllMDYyNSIsImEiOiJja3plcDl3NTQwa2xoMzFtcXdtMGx4Z3U4In0.HJZkpBQj0blh5xUoXXR-VA"
 

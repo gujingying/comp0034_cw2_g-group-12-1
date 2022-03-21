@@ -25,7 +25,7 @@ def clean_data(df):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv('../data/all.csv', parse_dates=['utc'], index_col=['utc'])
+    df = pd.read_csv('../my_app/dash_app/data/all.csv', parse_dates=['utc'], index_col=['utc'])
 
 # London
 df1 = df[df['location_x'].str.match('London')]
@@ -61,4 +61,4 @@ df_merge.reset_index(inplace=True)
 df['utc'] = pd.to_datetime(df['utc']).dt.date
 df['Total (avg)'].replace('', np.nan, inplace=True)
 df.dropna(subset=['Total (avg)'], inplace=True)
-df.to_csv('data/min-max-avg.csv', index=True, header=True)
+df.to_csv('../my_app/dash_app/data/min-max-avg.csv', index=True, header=True)
