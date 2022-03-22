@@ -12,7 +12,6 @@ class ProfileForm(FlaskForm):
     username = StringField(label='Username', validators=[DataRequired(message='Username is required')])
     bio = TextAreaField(label='Bio', description='Write something about yourself')
     photo = FileField('Profile picture', validators=[FileAllowed(photos, 'Images only!')])
-    region_id = SelectField(label='Select your air quality region', coerce=int)
 
     def validate_username(self, username):
         profile = Profile.query.filter_by(username=username.data).first()

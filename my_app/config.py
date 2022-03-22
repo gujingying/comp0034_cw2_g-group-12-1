@@ -8,8 +8,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(Path(__file__).parent.joinpath('my_example.sqlite'))
     TESTING = False
-    #DATA_PATH = Path(__file__).parent.parent.joinpath("data")
-
+    UPLOADED_PHOTOS_DEST = Path(__file__).parent.joinpath("static/img")
 
 class ProductionConfig(Config):
     pass

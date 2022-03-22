@@ -30,6 +30,7 @@ def create_app(config_class_name):
 
     csrf.init_app(app)
     db.init_app(app)
+    configure_uploads(app, photos)
     login_manager.login_view = "auth.login"
     login_manager.init_app(app)
 

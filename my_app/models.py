@@ -27,5 +27,5 @@ class Profile(db.Model):
     username = db.Column(db.Text, unique=True, nullable=False)
     photo = db.Column(db.Text)
     bio = db.Column(db.Text)
-    region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
