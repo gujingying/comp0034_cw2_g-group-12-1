@@ -60,7 +60,7 @@ def register_dashapp(app):
                          url_base_pathname='/dashboard/',
                          assets_folder=get_root_path(__name__) + '/dashboard/assets/',
                          meta_tags=[meta_viewport],
-                         external_stylesheets=[dbc.themes.SKETCHY])
+                         external_stylesheets=[dbc.themes.MINTY])
 
     with app.app_context():
         dashapp.title = 'Dashboard'
