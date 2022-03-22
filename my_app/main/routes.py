@@ -37,7 +37,7 @@ def create_profile():
             if request.files['photo'].filename != '':
                 # Save the photo using the global variable photos to get the location to save to
                 filename = photos.save(request.files['photo'])
-        p = Profile(region_id=form.region_id.data, username=form.username.data, photo=filename, bio=form.bio.data,
+        p = Profile(username=form.username.data, photo=filename, bio=form.bio.data,
                     user_id=current_user.id)
         db.session.add(p)
         db.session.commit()
