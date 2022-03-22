@@ -82,6 +82,6 @@ def display_profiles(username):
     urls = []
     for result in results:
         if result.photo:
-            url = photos.url(result.photo)
+            url = url_for('static', filename='img/'+result.photo)
             urls.append(url)
     return render_template('display_profile.html', profiles=zip(results, urls))
