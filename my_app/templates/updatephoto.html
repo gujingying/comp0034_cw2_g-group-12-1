@@ -5,8 +5,10 @@
     <form method="POST" action="" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <dl>
-            {{ render_field(form.username, class="form-control") }}
-            {{ render_field(form.bio, class="form-control") }}
+            {{ render_field(form.photo, class="custom-file", id="input_file") }}
+            <div class="card" style="width: 15rem;">
+                <img class="card-img" src="{{url_for('static', filename='img/' + filename)}}" alt="User profile photo">
+            </div>
         </dl>
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ url_for('main.profile')}}" class="btn btn-secondary" size="20rem" >Back</a>

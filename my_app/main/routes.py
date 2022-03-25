@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 
 from my_app import photos, db
-from my_app.main.forms import ProfileForm, UpdateProfileForm
+from my_app.main.forms import ProfileForm, UpdateProfileForm, UpdatePhotoForm
 from my_app.models import Profile
 from my_app.models import User
 
@@ -21,7 +21,7 @@ def index():
 def profile():
     profile = Profile.query.join(User, User.id == Profile.user_id).filter(User.id == current_user.id).first()
     if profile:
-        return redirect(url_for('main.display_profiles',username = profile.username))
+        return redirect(url_for('main.display_profiles',id = profile.user_id))
     else:
         return redirect(url_for('main.create_profile'))
 
@@ -41,7 +41,7 @@ def create_profile():
                     user_id=current_user.id)
         db.session.add(p)
         db.session.commit()
-        return redirect(url_for('main.display_profiles', username=p.username))
+        return redirect(url_for('main.display_profiles', id=p.user_id))
     return render_template('profile.html', form=form)
 
 
@@ -53,38 +53,57 @@ def update_profile():
     form = UpdateProfileForm(obj=profile)
     if request.method == 'POST'and form.validate_on_submit():
         profile.bio = request.form['bio']
-        if 'photo' in request.files:
-            filename = photos.save(request.files['photo'])
-            profile.photo = filename
+        profile.username = request.form['username']
+        #if 'photo' in request.files:
+        #    filename = photos.save(request.files['photo'])
+        #    profile.photo = filename
         profile.bio = form.bio.data
         profile.username = form.username.data
         db.session.commit()
         return redirect(url_for('main.update_profile'))
     return render_template('updateprofile.html', form=form, filename=profile.photo)
 
+@main_bp.route('/update_photo', methods=['GET', 'POST'])
+@login_required
+def update_photo():
+    profile = Profile.query.join(User, User.id == Profile.user_id).filter_by(id=current_user.id).first()
+    # https://wtforms.readthedocs.io/en/3.0.x/fields/#wtforms.fields.SelectField fields with dynamic choice
+    form = UpdatePhotoForm(obj=profile)
+    if request.method == 'POST'and form.validate_on_submit():
+        #profile.bio = request.form['bio']
+        #profile.username = request.form['username']
+        if 'photo' in request.files:
+            filename = photos.save(request.files['photo'])
+            profile.photo = filename
+        #profile.bio = form.bio.data
+        #profile.username = form.username.data
+        db.session.commit()
+        return redirect(url_for('main.update_photo'))
+    return render_template('updatephoto.html', form=form, filename=profile.photo)
+
 
 #@main_bp.route('/display_profiles', methods=['POST', 'GET'], defaults={'username': None})
-@main_bp.route('/display_profiles/<username>', methods=['POST', 'GET'])
+@main_bp.route('/display_profiles/<id>', methods=['POST', 'GET'])
 @login_required
-def display_profiles(username):
+def display_profiles(id):
     results = None
-    if username is None:
+    if id is None:
         if request.method == 'POST':
             term = request.form['search_term']
             if term == "":
                 flash("Enter a name to search for")
                 return redirect(url_for("main.index"))
-            results = Profile.query.filter(Profile.username.contains(term)).all()
+            results = Profile.query.filter(Profile.id.contains(term)).all()
     else:
-        results = Profile.query.filter_by(username=username).all()
+        results = Profile.query.filter_by(id=id).all()
     if not results:
-        flash("Username not found.")
+        flash("Id not found.")
         return redirect(url_for("main.index"))
     urls = []
     for result in results:
         if result.photo:
             url = url_for('static', filename='img/'+result.photo)
             urls.append(url)
-    return render_template('display_profile.html',username=username, profiles=zip(results, urls))
+    return render_template('display_profile.html',id=id, profiles=zip(results, urls))
 
 

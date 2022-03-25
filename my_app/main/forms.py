@@ -13,18 +13,22 @@ class ProfileForm(FlaskForm):
     bio = TextAreaField(label='Bio', description='Write something about yourself')
     photo = FileField('Profile picture', validators=[FileAllowed(photos, 'Images only!')])
 
-    def validate_username(self, username):
-        profile = Profile.query.filter_by(username=username.data).first()
-        if profile is not None:
-            raise ValidationError('Username already exists, please choose another username')
+    #def validate_username(self, username):
+    #    profile = Profile.query.filter_by(username=username.data).first()
+    #    if profile is not None:
+    #        raise ValidationError('Username already exists, please choose another username')
 
 class UpdateProfileForm(FlaskForm):
     """ Class for the profile form """
     username = StringField(label='Username', validators=[DataRequired(message='Username is required')])
     bio = TextAreaField(label='Bio', description='Write something about yourself')
-    photo = FileField('Profile picture')
+    photo = FileField('Profile picture', validators=[FileAllowed(photos, 'Images only!')])
 
-    def validate_username(self, username):
-        profile = Profile.query.filter_by(username=username.data).first()
-        if profile is not None:
-            raise ValidationError('Username already exists, please choose another username')
+    #def validate_username(self, username):
+    #    profile = Profile.query.filter_by(username=username.data).first()
+    #    if profile is not None:
+    #        raise ValidationError('Username already exists, please choose another username')
+
+class UpdatePhotoForm(FlaskForm):
+    """ Class for the profile form """
+    photo = FileField('Profile picture', validators=[FileAllowed(photos, 'Images only!')])
