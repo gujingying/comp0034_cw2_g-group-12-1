@@ -2,12 +2,13 @@
 {% set title = 'Profile Display' %}
 {% from "_formhelpers.html" import render_field %}
 {% block content %}
-    {% for result, url in profiles %}
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{ url }}" alt="User profile photo">
+    {% for result, urls in profiles %}
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="{{ urls }}" alt="User profile photo">
             <div class="card-body">
                 <h5 class="card-title">{{ result.username }}</h5>
                 <p class="card-text">{{ result.bio }}</p>
+                 <a href="{{ url_for('main.update_profile')}}" class="btn btn-secondary btn-sm">edit profile</a>
             </div>
         </div>
     {% endfor %}
