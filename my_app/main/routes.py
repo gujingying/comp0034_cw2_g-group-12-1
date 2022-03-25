@@ -37,7 +37,7 @@ def create_profile():
             if request.files['photo'].filename != '':
                 # Save the photo using the global variable photos to get the location to save to
                 filename = photos.save(request.files['photo'])
-        p = Profile(username=form.username.data, photo=filename, bio=form.bio.data,
+        p = Profile(username=form.username.data, photo=filename, bio=form.bio.data, gender=form.gender.data,
                     user_id=current_user.id)
         db.session.add(p)
         db.session.commit()
@@ -50,16 +50,19 @@ def create_profile():
 def update_profile():
     profile = Profile.query.join(User, User.id == Profile.user_id).filter_by(id=current_user.id).first()
     # https://wtforms.readthedocs.io/en/3.0.x/fields/#wtforms.fields.SelectField fields with dynamic choice
-    form = UpdateProfileForm(obj=profile)
+    form = ProfileForm(obj=profile)
     if request.method == 'POST'and form.validate_on_submit():
         profile.bio = request.form['bio']
         profile.username = request.form['username']
+        profile.gender = request.form['gender']
         #if 'photo' in request.files:
         #    filename = photos.save(request.files['photo'])
         #    profile.photo = filename
         profile.bio = form.bio.data
         profile.username = form.username.data
+        profile.gender = form.gender.data
         db.session.commit()
+        flash('Your profile has been updated!')
         return redirect(url_for('main.update_profile'))
     return render_template('updateprofile.html', form=form, filename=profile.photo)
 
@@ -78,6 +81,7 @@ def update_photo():
         #profile.bio = form.bio.data
         #profile.username = form.username.data
         db.session.commit()
+        flash('Your profile photo has been updated!')
         return redirect(url_for('main.update_photo'))
     return render_template('updatephoto.html', form=form, filename=profile.photo)
 
