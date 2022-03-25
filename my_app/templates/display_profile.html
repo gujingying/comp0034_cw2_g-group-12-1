@@ -3,15 +3,16 @@
 {% from "_formhelpers.html" import render_field %}
 {% block content %}
     {% for result, urls in profiles %}
+        <br>
         <div class="row">
             <div class="col-auto">
-                <div class="card" style="width: 15rem;">
+                <div class="card-img-top" style="width: 15rem;">
                     <img class="card-img-top" src="{{ urls }}" alt="User profile photo">
-                    <a href="{{ url_for('main.update_photo')}}" class="btn btn-secondary btn-sm">edit photo</a>
+                    <a href="{{ url_for('main.update_photo')}}" class="btn btn-outline-secondary btn-sm">edit photo</a>
                 </div>
             </div>
             <div class="col">
-                <div class="card">
+                <div class="card" style="background-color: transparent">
                     <div class="card-body" id="right">
                         <h4 class="card-title">{{result.username}}</h4>
                         <h7 class="text-secondary">{{ result.gender }}</h7>
