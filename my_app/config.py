@@ -1,5 +1,6 @@
 """Flask config class."""
 from pathlib import Path
+import os
 
 
 class Config(object):
@@ -9,6 +10,13 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(Path(__file__).parent.joinpath('my_example.sqlite'))
     TESTING = False
     UPLOADED_PHOTOS_DEST = Path(__file__).parent.joinpath("static/img")
+    MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    ADMINS = ['pjy0625@163.com']
+
 
 class ProductionConfig(Config):
     pass

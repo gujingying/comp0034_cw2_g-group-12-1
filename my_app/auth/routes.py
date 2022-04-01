@@ -1,15 +1,19 @@
 from datetime import timedelta
 from flask import Blueprint, abort, render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required
+from flask_login.utils import _get_user
 from sqlalchemy.exc import IntegrityError
 from urllib.parse import urlparse, urljoin
 
+from werkzeug.local import LocalProxy
+
 from my_app import db, login_manager
-from my_app.auth.forms import SignupForm, LoginForm
+from my_app.auth.forms import SignupForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm
 from my_app.models import User
+from my_app.myemail import send_password_reset_email
 
 auth_bp = Blueprint('auth', __name__)
-
+current_user = LocalProxy(lambda: _get_user())
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -71,3 +75,35 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
+
+
+@auth_bp.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        else:
+            flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('auth.login'))
+    return render_template('reset_password_request.html',
+                            title='Reset Password', form=form)
+
+
+@auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)

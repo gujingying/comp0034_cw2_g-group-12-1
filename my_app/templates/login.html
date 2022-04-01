@@ -6,6 +6,10 @@
         {{ render_field(form.email, class="form-control") }}
         {{ render_field(form.password, class="form-control") }}
         {{ render_field(form.remember, class="form-check-input") }}
+        <p>
+         Forgot Your Password?
+         <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+        </p>
     <p><button type="submit" class="btn btn-primary">Login</button></p>
     </form>
 {% endblock %}

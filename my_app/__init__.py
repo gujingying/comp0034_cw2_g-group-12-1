@@ -9,13 +9,14 @@ from flask_login import LoginManager, login_required
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, IMAGES, configure_uploads
 from flask_wtf.csrf import CSRFProtect
+from flask_mail import Mail
 
 csrf = CSRFProtect()
 csrf._exempt_views.add('dash.dash.dispatch')
 db = SQLAlchemy()
 login_manager = LoginManager()
 photos = UploadSet('photos', IMAGES)
-
+mail = Mail()
 
 def create_app(config_class_name):
     """
@@ -34,11 +35,9 @@ def create_app(config_class_name):
     login_manager.login_view = "auth.login"
     login_manager.init_app(app)
 
-
     with app.app_context():
         from my_app.models import User, Profile
         db.create_all()
-
 
     from my_app.main.routes import main_bp
     app.register_blueprint(main_bp)
