@@ -35,12 +35,13 @@ fig_mapbox = go.Figure()
 fig_mapbox.add_trace(
     go.Scattermapbox(lat=df["Latitude"], lon=df["Longitude"], text=df["Location"],
                      marker=go.scattermapbox.Marker(size=12, color='rgb(255, 0, 0)', opacity=0.7),
-                     mode='markers+text', textposition="top center")),
+                     mode='markers+text', textposition="top center"))
 
 fig_mapbox.add_trace(
     go.Scattermapbox(lat=df["Latitude"], lon=df["Longitude"],
-                     marker=go.scattermapbox.Marker(size=6, color='rgb(242, 177, 172)', opacity=0.7),
-                     mode='markers', hoverinfo=None)),
+                     marker=go.scattermapbox.Marker(size=6, color='rgb(242, 177, 172)',
+                                                    opacity=0.7),
+                     mode='markers', hoverinfo=None))
 
 fig_mapbox.update_layout(
     width=570, height=425, margin=dict(l=140, r=0, t=35, b=0),
@@ -97,7 +98,8 @@ def init_dashboard(flask_app):
 
                         dbc.Row([
                             dbc.Col([
-                                html.H5('Select date for the heatmap:', style={'text-align': 'center'}),
+                                html.H5('Select date for the heatmap:',
+                                        style={'text-align': 'center'}),
                                 html.Br(),
                                 html.P('view total pollutants amount in each city',
                                        style={'text-align': 'center'}),
@@ -339,7 +341,8 @@ def init_callbacks(dash_app):
             data.process_data_for_single_day(area_comment, date_value_comment)
 
         if data.day_data['PM2.5'].mean() < 12 and data.day_data['PM10'].mean() < 45:
-            comment = "Hurrah! The air is so good! Both pollutants amount are in the safe area. Let's take a fresh walk!~"
+            comment = "Hurrah! The air is so good! " \
+                      "Both pollutants amount are in the safe area. Let's take a fresh walk!~"
 
         elif data.day_data['PM2.5'].mean() < 12 and 45 <= data.day_data['PM10'].mean() < 100:
             comment = "Overall good air quality! The PM2.5 value in the safe area, " \
@@ -359,7 +362,8 @@ def init_callbacks(dash_app):
             comment = "Sorry, there is no data about this day."
 
         else:
-            comment = "Uh-oh, be careful about the pollution, you can wear a mask to protect yourself!"
+            comment = "Uh-oh, be careful about the pollution, " \
+                      "you can wear a mask to protect yourself!"
 
         return comment
 

@@ -31,13 +31,15 @@ def profile():
 def create_profile():
     form = ProfileForm()
     if request.method == 'POST' and form.validate_on_submit():
-        # Set the filename for the photo to None, this is the default if the user hasn't chosen to add a profile photo
+        # Set the filename for the photo to None,
+        # this is the default if the user hasn't chosen to add a profile photo
         filename = None
         if 'photo' in request.files:
             if request.files['photo'].filename != '':
                 # Save the photo using the global variable photos to get the location to save to
                 filename = photos.save(request.files['photo'])
-        p = Profile(username=form.username.data, photo=filename, bio=form.bio.data, gender=form.gender.data,
+        p = Profile(username=form.username.data, photo=filename,
+                    bio=form.bio.data, gender=form.gender.data,
                     user_id=current_user.id)
         db.session.add(p)
         db.session.commit()
@@ -49,7 +51,6 @@ def create_profile():
 @login_required
 def update_profile():
     profile = Profile.query.join(User, User.id == Profile.user_id).filter_by(id=current_user.id).first()
-    # https://wtforms.readthedocs.io/en/3.0.x/fields/#wtforms.fields.SelectField fields with dynamic choice
     form = ProfileForm(obj=profile)
     if request.method == 'POST'and form.validate_on_submit():
         profile.bio = request.form['bio']
@@ -70,7 +71,6 @@ def update_profile():
 @login_required
 def update_photo():
     profile = Profile.query.join(User, User.id == Profile.user_id).filter_by(id=current_user.id).first()
-    # https://wtforms.readthedocs.io/en/3.0.x/fields/#wtforms.fields.SelectField fields with dynamic choice
     form = UpdatePhotoForm(obj=profile)
     if request.method == 'POST'and form.validate_on_submit():
         #profile.bio = request.form['bio']
@@ -78,15 +78,12 @@ def update_photo():
         if 'photo' in request.files:
             filename = photos.save(request.files['photo'])
             profile.photo = filename
-        #profile.bio = form.bio.data
-        #profile.username = form.username.data
         db.session.commit()
         flash('Your profile photo has been updated!')
         return redirect(url_for('main.update_photo'))
     return render_template('updatephoto.html', form=form, filename=profile.photo)
 
 
-#@main_bp.route('/display_profiles', methods=['POST', 'GET'], defaults={'username': None})
 @main_bp.route('/display_profiles/<id>', methods=['POST', 'GET'])
 @login_required
 def display_profiles(id):

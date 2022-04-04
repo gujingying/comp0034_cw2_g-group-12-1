@@ -25,12 +25,14 @@ fig_mapbox = go.Figure()
 
 fig_mapbox.add_trace(
     go.Scattermapbox(lat=df["Latitude"], lon=df["Longitude"], text=df["Location"],
-                     marker=go.scattermapbox.Marker(size=12, color='rgb(255, 0, 0)', opacity=0.7),
+                     marker=go.scattermapbox.Marker(size=12, color='rgb(255, 0, 0)',
+                                                    opacity=0.7),
                      mode='markers+text', textposition="top center")),
 
 fig_mapbox.add_trace(
     go.Scattermapbox(lat=df["Latitude"], lon=df["Longitude"],
-                     marker=go.scattermapbox.Marker(size=6, color='rgb(242, 177, 172)', opacity=0.7),
+                     marker=go.scattermapbox.Marker(size=6, color='rgb(242, 177, 172)',
+                                                    opacity=0.7),
                      mode='markers', hoverinfo=None)),
 
 fig_mapbox.update_layout(
@@ -80,7 +82,8 @@ layout = dbc.Container([
 
                     dbc.Row([
                         dbc.Col([
-                            html.H5('Select date for the heatmap:', style={'text-align': 'center'}),
+                            html.H5('Select date for the heatmap:',
+                                    style={'text-align': 'center'}),
                             html.Br(),
                             html.P('view total pollutants amount in each city',
                                    style={'text-align': 'center'}),
