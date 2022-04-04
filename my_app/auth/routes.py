@@ -4,9 +4,7 @@ from flask_login import login_user, logout_user, login_required
 from flask_login.utils import _get_user
 from sqlalchemy.exc import IntegrityError
 from urllib.parse import urlparse, urljoin
-
 from werkzeug.local import LocalProxy
-
 from my_app import db, login_manager
 from my_app.auth.forms import SignupForm, LoginForm, ResetPasswordRequestForm, ResetPasswordForm
 from my_app.models import User
@@ -14,6 +12,7 @@ from my_app.myemail import send_password_reset_email
 
 auth_bp = Blueprint('auth', __name__)
 current_user = LocalProxy(lambda: _get_user())
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -89,10 +88,9 @@ def reset_password_request():
             flash('Check your email for the instructions to reset your password')
             return redirect(url_for('auth.login'))
         else:
-            flash('Invalid email address please try again')
-            #return redirect(url_for('reset_password_request'))
+            flash('Invalid email address, please try again')
     return render_template('reset_password_request.html',
-                            title='Reset Password', form=form)
+                           title='Reset Password', form=form)
 
 
 @auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])

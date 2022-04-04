@@ -6,8 +6,8 @@ from my_app import mail
 from threading import Thread
 
 
-def send_async_email(currrent_app, msg):
-    with currrent_app.app_context():
+def send_async_email(current_app, msg):
+    with current_app.app_context():
         try:
             mail.send(msg)
         except ConnectionRefusedError:

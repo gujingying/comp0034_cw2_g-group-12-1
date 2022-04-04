@@ -1,19 +1,13 @@
-import json
-import my_app.dash_app.chart as cc
 import math
-from datetime import date
-import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import dash_daq as daq
-import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Output, Input
 from my_app.dash_app.airdata import AirQualityData
 from my_app.dash_app.chart import AirQualityChart
-
 
 # Prepare the data set
 data = AirQualityData()
@@ -50,6 +44,7 @@ rc = AirQualityChart(data)
 airtype_list = ['PM2.5', 'PM10']
 airtype = 'PM2.5'
 fig_rc = rc.create_chart(area, airtype)
+
 
 def register_callbacks(dash_app):
     """ Create the callbacks for a Plotly Dash dash_app. """
@@ -125,7 +120,7 @@ def register_callbacks(dash_app):
             card2 = dbc.Card(className="card border-light mb-3", children=[
                 dbc.CardBody([
                     dbc.Row([
-                        #html.H4(area_card, id="card-name", className="card-title"),
+                        # html.H4(area_card, id="card-name", className="card-title"),
                         html.Br(),
 
                         dbc.Col(width=7, children=[
@@ -147,12 +142,11 @@ def register_callbacks(dash_app):
                                     className="card-text text-dark"),
                             html.H6("Mean", className="card-title"),
                             html.H4("{:,.0f}".format(
-                                 data.day_data['PM10'].mean()), className="card-text text-dark"),
+                                data.day_data['PM10'].mean()), className="card-text text-dark"),
                         ]),
                     ]),
                 ]),
             ])
-
 
         return card1, card2
 

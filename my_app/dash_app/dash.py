@@ -130,29 +130,29 @@ def init_dashboard(flask_app):
             dcc.Tab(label='Daily Matters', children=[
 
                 dbc.Row([dbc.Col(width=4, children=[
-                        html.Br(),
-                        html.H6('Select Date'),
-                        dcc.DatePickerSingle(
-                            id='my-date-picker-single',
-                            min_date_allowed=date(2021, 1, 1),
-                            max_date_allowed=date(2021, 12, 31),
-                            initial_visible_month=date(2021, 1, 1),
-                            date=date(2021, 1, 1)
-                        ),
-                        html.Br(),
-                        html.Br(),
-                        html.H6("Select Area"),
-                        dcc.Dropdown(id="area-select_d",
-                                     options=[{"label": x, "value": x}
-                                              for x in data.area_list],
-                                     value="London"),
-                        html.Br(),
-                        html.P("As suggested by WHO global air quality guidelines,"
-                               "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
-                               "the 24-hour mean of PM10 below 45 micrograms is good.",
-                               style={'text-align': 'center'}),
-                        html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
-                    ]),
+                    html.Br(),
+                    html.H6('Select Date'),
+                    dcc.DatePickerSingle(
+                        id='my-date-picker-single',
+                        min_date_allowed=date(2021, 1, 1),
+                        max_date_allowed=date(2021, 12, 31),
+                        initial_visible_month=date(2021, 1, 1),
+                        date=date(2021, 1, 1)
+                    ),
+                    html.Br(),
+                    html.Br(),
+                    html.H6("Select Area"),
+                    dcc.Dropdown(id="area-select_d",
+                                 options=[{"label": x, "value": x}
+                                          for x in data.area_list],
+                                 value="London"),
+                    html.Br(),
+                    html.P("As suggested by WHO global air quality guidelines,"
+                           "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
+                           "the 24-hour mean of PM10 below 45 micrograms is good.",
+                           style={'text-align': 'center'}),
+                    html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
+                ]),
                          dbc.Col(html.Div(id='card1')),
                          dbc.Col(html.Div(id='card2')),
                          # dbc.Col(html.Div("one of the three")),
@@ -242,7 +242,7 @@ def init_dashboard(flask_app):
                     ]),
 
                     # Add the scatter chart
-                    #dcc.Graph(id='recycle-chart', figure=fig_rc)
+                    # dcc.Graph(id='recycle-chart', figure=fig_rc)
                 ]),
                 dbc.Row(
                     dbc.Col(children=[
@@ -330,7 +330,7 @@ def init_callbacks(dash_app):
             card2 = dbc.Card(className="card border-light mb-3", children=[
                 dbc.CardBody([
                     dbc.Row([
-                        #html.H4(area_card, id="card-name", className="card-title"),
+                        # html.H4(area_card, id="card-name", className="card-title"),
                         html.Br(),
 
                         dbc.Col(width=7, children=[
@@ -352,12 +352,11 @@ def init_callbacks(dash_app):
                                     className="card-text text-dark"),
                             html.H6("Mean", className="card-title"),
                             html.H4("{:,.0f}".format(
-                                 data.day_data['PM10'].mean()), className="card-text text-dark"),
+                                data.day_data['PM10'].mean()), className="card-text text-dark"),
                         ]),
                     ]),
                 ]),
             ])
-
 
         return card1, card2
 

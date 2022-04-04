@@ -1,8 +1,5 @@
-from pathlib import Path
-
 import dash
 import dash_bootstrap_components as dbc
-import pandas as pd
 from flask import Flask
 from flask.helpers import get_root_path
 from flask_login import LoginManager, login_required
@@ -17,6 +14,7 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 photos = UploadSet('photos', IMAGES)
 mail = Mail()
+
 
 def create_app(config_class_name):
     """
@@ -56,11 +54,11 @@ def register_dashapp(app):
     meta_viewport = {"name": "viewport", "content": "width=device-width, initial-scale=1, shrink-to-fit=no"}
 
     dashapp = dash.Dash(__name__,
-                         server=app,
-                         url_base_pathname='/dashboard/',
-                         assets_folder=get_root_path(__name__) + '/dashboard/assets/',
-                         meta_tags=[meta_viewport],
-                         external_stylesheets=[dbc.themes.MINTY])
+                        server=app,
+                        url_base_pathname='/dashboard/',
+                        assets_folder=get_root_path(__name__) + '/dashboard/assets/',
+                        meta_tags=[meta_viewport],
+                        external_stylesheets=[dbc.themes.MINTY])
 
     with app.app_context():
         dashapp.title = 'Dashboard'
