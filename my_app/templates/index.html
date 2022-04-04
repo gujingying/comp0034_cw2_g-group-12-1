@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
-    {% for img in images %}
-        <div class="float-start p-2 mx-3 text-center">
-            <img height=100 id="img-{{ img[2] }}-{{ img[1] }}" src="{{ url_for('static', filename='images/logos/') }}{{ img[0] }}"
-                 alt="{{ img[2] }} {{ img[1] }}">
-            <p>{{ img[1] }}</p>
-            <p>{{ img[2] }}</p>
-
-        </div>
-    {% endfor %}
+    <br>
+    <br>
+    <head>
+    </head>
+    <body>
+    <h1 style="text-align: center;"><span style="color: #000000; font-size: 36pt;"><strong><span style="font-family: 'times new roman', times, serif;">Improve Air Quality</span></strong></span></h1>
+    <p style="text-align: center;"><span style="color: #000000; font-size: 18pt;"><strong><span style="font-family: 'times new roman', times, serif;">PM2.5 &amp; PM 10 Dashboard</span></strong></span></p>
+    <p style="text-align: left;">&nbsp;</p>
+    <p style="text-align: left;"><span style="color: #000000; font-size: 18pt;"><strong><span style="font-family: 'times new roman', times, serif;">Let's learn more about the air quality data! 🧐</span></strong></span></p>
+        <a href="{{ url_for('auth.signup')}}" button class="btn btn-outline-secondary" type="button" style="align-self: center">Let's get started!</a>
+    <p>&nbsp;</p>
+    </body>
 {% endblock %}
