@@ -120,7 +120,6 @@ def register_callbacks(dash_app):
             card2 = dbc.Card(className="card border-light mb-3", children=[
                 dbc.CardBody([
                     dbc.Row([
-                        # html.H4(area_card, id="card-name", className="card-title"),
                         html.Br(),
 
                         dbc.Col(width=7, children=[

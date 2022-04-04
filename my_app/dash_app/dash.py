@@ -56,8 +56,6 @@ fig_rc = rc.create_chart(area, airtype)
 external_stylesheets = [dbc.themes.MINTY]
 
 
-# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
 def init_dashboard(flask_app):
     dash_app = dash.Dash(server=flask_app,
                          routes_pathname_prefix="/dash_app/",
@@ -65,7 +63,6 @@ def init_dashboard(flask_app):
 
     # Create layout of the dashboard
     dash_app.layout = dbc.Container([
-        # html.Div([
         html.Br(),
         # First row display the dashboard name
         dbc.Row(dbc.Col(children=[
@@ -162,42 +159,14 @@ def init_dashboard(flask_app):
                     # Add the date/area pickers in the first column
                     dbc.Col(children=[
                         html.Br(),
-                        # dbc.Row([
-                        #     html.H6('Select Date'),
-                        #     dcc.DatePickerSingle(
-                        #         id='my-date-picker-single',
-                        #         min_date_allowed=date(2021, 1, 1),
-                        #         max_date_allowed=date(2021, 12, 31),
-                        #         initial_visible_month=date(2021, 1, 1),
-                        #         date=date(2021, 1, 1)
-                        #     ),
-                        # ]),
-                        # html.Br(),
-                        # dbc.Row([
-                        #     html.H6("Select Area"),
-                        #     dcc.Dropdown(id="area-select_d",
-                        #                  options=[{"label": x, "value": x}
-                        #                           for x in data.area_list],
-                        #                  value="London"),
-                        # ]),
                         html.Br(),
 
                         # Add the comment area under the pickers
                         html.Br(),
                         html.Br(),
-                        # html.P("As suggested by WHO global air quality guidelines,"
-                        #        "the 24-hour mean of PM2.5 below 12 micrograms is good ,"
-                        #        "the 24-hour mean of PM10 below 45 micrograms is good.",
-                        #        style={'text-align': 'center'}),
                         html.Br(),
                         html.Br(),
-                        # html.Div(id='comment', className="text-info", style={'text-align': 'center'}),
                     ]),
-
-                    # Add the gauge charts in the second column
-                    # dbc.Col(children=[
-                    #     html.Div(id='card')
-                    # ]),
                 ]),
             ]),
 
@@ -242,7 +211,6 @@ def init_dashboard(flask_app):
                     ]),
 
                     # Add the scatter chart
-                    # dcc.Graph(id='recycle-chart', figure=fig_rc)
                 ]),
                 dbc.Row(
                     dbc.Col(children=[
@@ -330,7 +298,6 @@ def init_callbacks(dash_app):
             card2 = dbc.Card(className="card border-light mb-3", children=[
                 dbc.CardBody([
                     dbc.Row([
-                        # html.H4(area_card, id="card-name", className="card-title"),
                         html.Br(),
 
                         dbc.Col(width=7, children=[
