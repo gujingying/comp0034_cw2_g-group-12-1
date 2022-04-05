@@ -13,9 +13,6 @@ main_bp = Blueprint('main', __name__)
 
 @main_bp.route('/')
 def index():
-    #if current_user.is_authenticated:
-    #    flash('Welcome back, ' + current_user.first_name + '!')
-
     api_key = '424dec4cf6034b2d8f81225fd670d72d'
     search = 'air quality'
     newest = datetime.today().strftime('%Y-%m-%d')
