@@ -14,6 +14,10 @@
         </dl>
         <p><button type="submit" class="btn btn-primary">Sign up</button></p>
     </form>
+    <p>
+         Login
+         <a href="{{ url_for('auth.login') }}">here</a>
+    </p>
 
     {# This version doesn't use the _formhelpers
     <form method="POST" action="{{ url_for('auth.signup') }}" class="row g3">
