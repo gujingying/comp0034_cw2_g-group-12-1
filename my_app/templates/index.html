@@ -12,4 +12,9 @@
         <a href="{{ url_for('/dashboard/')}}" button class="btn btn-outline-secondary" type="button" style="align-self: center">Let's get started!</a>
     <p>&nbsp;</p>
     </body>
+    <br>
+    <h2>Latest air quality news</h2>
+    {% for article in news['articles'] %}
+        <p><a href="{{ article.url|e }}">{{ article.title|e }}</a></p>
+    {% endfor %}
 {% endblock %}

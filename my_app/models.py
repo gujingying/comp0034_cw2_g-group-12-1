@@ -47,3 +47,10 @@ class Profile(db.Model):
     bio = db.Column(db.Text)
     gender = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    @property
+    def serialize(self): return {
+        'id': self.user_id,
+        'username': self.username,
+        'bio': self.bio,
+    }

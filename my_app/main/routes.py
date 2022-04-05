@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta
+
+import requests as requests
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 
@@ -12,7 +15,22 @@ main_bp = Blueprint('main', __name__)
 def index():
     if current_user.is_authenticated:
         flash('Welcome back, ' + current_user.first_name + '!')
-    return render_template('index.html', title="Home")
+    #return render_template('index.html', title="Home")
+
+    api_key = '424dec4cf6034b2d8f81225fd670d72d'  # place your API key here
+    search = 'air quality'
+    newest = datetime.today().strftime('%Y-%m-%d')
+    oldest = (datetime.today() - timedelta(hours=1)).strftime('%Y-%m-%d')
+    sort_by = 'publishedAt'
+    url = f'https://newsapi.org/v2/everything?q={search}&from={oldest}&to={newest}&sortBy={sort_by}'
+
+    response = requests.get(url, headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {}'.format(api_key)
+    })
+    news = response.json()
+
+    return render_template('index.html', title='Home page', news=news)
 
 
 @main_bp.route('/profile', methods=['GET', 'POST'])
