@@ -2,17 +2,62 @@
 {% block content %}
     <br>
     <br>
-    <head>
-    </head>
-    <body>
-    <h1 style="text-align: center;"><span style="color: #000000; font-size: 36pt;"><strong><span style="font-family: 'times new roman', times, serif;">Improve Air Quality</span></strong></span></h1>
-    <p style="text-align: center;"><span style="color: #000000; font-size: 18pt;"><strong><span style="font-family: 'times new roman', times, serif;">PM2.5 &amp; PM 10 Dashboard</span></strong></span></p>
-    <p style="text-align: left;">&nbsp;</p>
-    <p style="text-align: center;"><span style="color: #000000; font-size: 18pt;"><strong><span style="font-family: 'times new roman', times, serif;">Let's learn more about the air quality data! 🧐</span></strong></span></p>
-    <p style="text-align: center"><a href="{{ url_for('/dashboard/')}}" button class="btn btn-outline-secondary" type="button" style="align-self: center">Get started!</a></p>
-    <p>&nbsp;</p>
-    </body>
+    <div style="display:inline;text-align:left; ">
+        <img alt="why air quality image" class=img-responsive width=50%
+             src="{{ url_for('static', filename='img/why air quality.jpg') }}">
+        <div style="float: right">
+            <div style="list-style-type:square">
+                <div class="container">
+                    <h1 style="text-align: center;">
+              <span style="color: #000000; font-size: 36pt;"><strong>
+                  <span style="font-family: 'times new roman', times, serif;">Why open air quality?</span></strong></span>
+                    </h1>
+                    <br>
+                    <p style="text-align: center;">
+              <span style="color: #000000; font-size: 14pt;"><span
+                      style="font-family: 'times new roman', times, serif;">
+                  Poor air quality is one of the largest public health threats of our time.</span></span></p>
+                    <p style="text-align: center;">
+              <span style="color: #000000; font-size: 14pt;">
+                  <span style="font-family: 'times new roman', times, serif;">
+                  Both short- and long-term exposure to air pollution can lead to a wide</span></span></p>
+                    <p style="text-align: center;">
+              <span style="color: #000000; font-size: 14pt;">
+                  <span style="font-family: 'times new roman', times, serif;">
+                  range of diseases, including stroke, chronic obstructive pulmonary</span></span></p>
+                    <p style="text-align: center;">
+              <span style="color: #000000; font-size: 14pt;">
+                  <span style="font-family: 'times new roman', times, serif;">
+                   disease, trachea, bronchus and lung cancers, aggravated asthma and</span></span></p>
+                    <p style="text-align: center;">
+              <span style="color: #000000; font-size: 14pt;">
+                  <span style="font-family: 'times new roman', times, serif;">
+                  lower respiratory infections. According to statistics, its current situation:</span></span></p>
+                    <p style="text-align: center;">
+              <span style="color: #ff7a69; font-size: 18pt;"><strong>
+                  <span style="font-family: 'times new roman', times, serif;">8.8M  [deaths each year] </span></strong></span>
+                    </p>
+                    <p style="text-align: center;">
+              <span style="color: #faa76e; font-size: 18pt;"><strong>
+                  <span style="font-family: 'times new roman', times, serif;">90%  [in developing countries] </span></strong></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br>
+    <br>
+    <br>
+    <br>
+    <p style="text-align: center;"><span style="color: #000000; font-size: 18pt;"><strong><span
+            style="font-family: 'times new roman', times, serif;">Let's find your air quality data! 🧐</span></strong></span>
+    </p>
+    <p style="text-align: center"><a href="{{ url_for('/dashboard/') }}" button class="btn btn-outline-secondary"
+                                     type="button" style="align-self: center">Get started!</a></p>
+    <p>&nbsp;</p>
+
+
     <h2>Latest air quality news</h2>
     {% for article in news['articles'] %}
         <p><a href="{{ article.url|e }}">{{ article.title|e }}</a></p>
