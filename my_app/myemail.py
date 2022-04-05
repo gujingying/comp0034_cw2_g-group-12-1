@@ -1,9 +1,9 @@
 from flask_mail import Message
 from flask import render_template, current_app
 from werkzeug.exceptions import InternalServerError
+from threading import Thread
 
 from my_app import mail
-from threading import Thread
 
 
 def send_async_email(current_app, msg):

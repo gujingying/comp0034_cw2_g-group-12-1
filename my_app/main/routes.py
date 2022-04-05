@@ -1,11 +1,8 @@
-import os
-import pandas as pd
-
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required
 
 from my_app import photos, db
-from my_app.main.forms import ProfileForm, UpdateProfileForm, UpdatePhotoForm
+from my_app.main.forms import ProfileForm, UpdatePhotoForm
 from my_app.models import Profile
 from my_app.models import User
 
@@ -36,7 +33,7 @@ def create_profile():
         filename = None
         if 'photo' in request.files:
             if request.files['photo'].filename != '':
-                # Save the photo using the global variable photos to get the location to save to
+                # Save the photo using the global variable photos to get the location to save
                 filename = photos.save(request.files['photo'])
         p = Profile(username=form.username.data, photo=filename,
                     bio=form.bio.data, gender=form.gender.data,
@@ -56,9 +53,6 @@ def update_profile():
         profile.bio = request.form['bio']
         profile.username = request.form['username']
         profile.gender = request.form['gender']
-        #if 'photo' in request.files:
-        #    filename = photos.save(request.files['photo'])
-        #    profile.photo = filename
         profile.bio = form.bio.data
         profile.username = form.username.data
         profile.gender = form.gender.data
@@ -73,8 +67,6 @@ def update_photo():
     profile = Profile.query.join(User, User.id == Profile.user_id).filter_by(id=current_user.id).first()
     form = UpdatePhotoForm(obj=profile)
     if request.method == 'POST'and form.validate_on_submit():
-        #profile.bio = request.form['bio']
-        #profile.username = request.form['username']
         if 'photo' in request.files:
             filename = photos.save(request.files['photo'])
             profile.photo = filename

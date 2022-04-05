@@ -11,12 +11,10 @@ class Config(object):
                               str(Path(__file__).parent.joinpath('my_example.sqlite'))
     TESTING = False
     UPLOADED_PHOTOS_DEST = Path(__file__).parent.joinpath("static/img")
-    MAIL_SUPPRESS = False
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    # MAIL_PASSWORD = ''
     ADMINS = ['zcecjp0@gmail.com']
 
 
