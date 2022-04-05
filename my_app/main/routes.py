@@ -15,9 +15,8 @@ main_bp = Blueprint('main', __name__)
 def index():
     #if current_user.is_authenticated:
     #    flash('Welcome back, ' + current_user.first_name + '!')
-    #return render_template('index.html', title="Home")
 
-    api_key = '424dec4cf6034b2d8f81225fd670d72d'  # place your API key here
+    api_key = '424dec4cf6034b2d8f81225fd670d72d'
     search = 'air quality'
     newest = datetime.today().strftime('%Y-%m-%d')
     oldest = (datetime.today() - timedelta(hours=1)).strftime('%Y-%m-%d')
