@@ -64,6 +64,7 @@ def login():
         user = User.query.filter_by(email=login_form.email.data).first()
         login_user(user, remember=login_form.remember.data, duration=timedelta(minutes=1))
         next = request.args.get('next')
+        flash('Welcome back, ' + current_user.first_name + '!')
         if not is_safe_url(next):
             return abort(400)
         return redirect(next or url_for('main.index'))
