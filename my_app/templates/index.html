@@ -1,68 +1,92 @@
+<script src="{{ url_for('static', filename='css/number.css') }}"></script>
+<script src="{{ url_for('static', filename='js/number.js') }}"></script>
 {% extends 'layout.html' %}
 {% block content %}
+    <div class="box"></div>
+    <marquee bgcolor=transparent behavior="scroll" direction="auto" height="auto" style="overflow:hidden;"
+             scrollamount="3" width="auto" onMouseOver="stop()" onMouseOut="start()">
+        <p> {% for article in news['articles'] %}
+            <a style="color: midnightblue; " href="{{ article.url|e }}">{{ article.title|e }}</a>
+        {% endfor %}<p>
+    </marquee>
+    <body style="width: auto;overflow: auto;">
     <br>
     <br>
-    <div style="display:inline;text-align:left; ">
-        <img alt="why air quality image" class=img-responsive width=50%
-             src="{{ url_for('static', filename='img/why air quality.jpg') }}">
-        <div style="float: right">
-            <div style="list-style-type:square">
-                <div class="container">
-                    <h1 style="text-align: center;">
-              <span style="color: #000000; font-size: 36pt;"><strong>
-                  <span style="font-family: 'times new roman', times, serif;">Why open air quality?</span></strong></span>
-                    </h1>
-                    <br>
-                    <p style="text-align: center;">
-              <span style="color: #000000; font-size: 14pt;"><span
-                      style="font-family: 'times new roman', times, serif;">
-                  Poor air quality is one of the largest public health threats of our time.</span></span></p>
-                    <p style="text-align: center;">
-              <span style="color: #000000; font-size: 14pt;">
-                  <span style="font-family: 'times new roman', times, serif;">
-                  Both short- and long-term exposure to air pollution can lead to a wide</span></span></p>
-                    <p style="text-align: center;">
-              <span style="color: #000000; font-size: 14pt;">
-                  <span style="font-family: 'times new roman', times, serif;">
-                  range of diseases, including stroke, chronic obstructive pulmonary</span></span></p>
-                    <p style="text-align: center;">
-              <span style="color: #000000; font-size: 14pt;">
-                  <span style="font-family: 'times new roman', times, serif;">
-                   disease, trachea, bronchus and lung cancers, aggravated asthma and</span></span></p>
-                    <p style="text-align: center;">
-              <span style="color: #000000; font-size: 14pt;">
-                  <span style="font-family: 'times new roman', times, serif;">
-                  lower respiratory infections. According to statistics, its current situation:</span></span></p>
-                    <p style="text-align: center;">
-              <span style="color: #ff7a69; font-size: 18pt;"><strong>
-                  <span style="font-family: 'times new roman', times, serif;">8.8M  [deaths each year] </span></strong></span>
-                    </p>
-                    <p style="text-align: center;">
-              <span style="color: #faa76e; font-size: 18pt;"><strong>
-                  <span style="font-family: 'times new roman', times, serif;">90%  [in developing countries] </span></strong></span>
-                    </p>
+    <div class="row">
+        <div class="col">
+            <div class="card-body" style="width: auto">
+                <div style="float: left">
+                    <div style="list-style-type:square">
+                        <div class="container">
+                            <h1 style="text-align: center;">
+                <span style="color: #000000; font-size: 36pt;"><strong>
+                    <span style="font-family: 'unset'">Why open air quality?</span></strong></span>
+                            </h1>
+                            <br>
+                            <p style="text-align: justify;">
+                    <span style="color: #000000; font-size: 14pt;"><span
+                            style="font-family: 'unset'">
+                        Poor air quality is one of the largest public health threats of our time.
+                        Both short- and long-term exposure to air pollution can lead to a wide
+                        range of diseases, including stroke, chronic obstructive pulmonary
+                        disease, trachea, bronchus and lung cancers, aggravated asthma and
+                        lower respiratory infections. According to statistics, its current situation:</span></span></p>
+                            <marquee bgcolor=transparent behavior="slide" direction="up" height="auto"
+                                     style="overflow:hidden;" scrollamount="5" width="auto" onMouseOver="stop()"
+                                     onMouseOut="start()">
+                                <p style="text-align: center;">
+                <span style="color: #ff7a69; font-size: 30pt;"><strong>
+                      <span style="font-family: unset">8.8M </strong><span style="color: #ff7a69; font-size: 16pt;"> deaths each year</span> </span></span>
+                                </p>
+                                <p style="text-align: center;">
+                <span style="color: #faa76e; font-size: 30pt;"><strong>
+                      <span style="font-family: 'unset'">90%</strong>  <span style="color: #faa76e; font-size: 16pt;"> in developing countries </span></span></span>
+
+                                </p>
+                            </marquee>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-auto">
+            <div class="card-img" style="width: 20rem">
+                <img class="card-img" alt="why air quality image" class=img-responsive width=35%
+                     src="{{ url_for('static', filename='img/why air quality.jpg') }}">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-body">
+                <br>
+                <br>
+                <p style="text-align: center;">
+            <span style="color: #000000; font-size: 20pt;"><strong>
+             <span style="font-family: 'unset'">
+                   Let's find your air quality data! 🧐</span></strong></span>
+                </p>
+                <p style="text-align: center"><a href="{{ url_for('/dashboard/') }}" button
+                                                 class="btn btn-warning"
+                                                 type="button" style="align-self: center">Get started!</a></p>
             </div>
         </div>
     </div>
-
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <p style="text-align: center;">
-        <span style="color: #000000; font-size: 18pt;"><strong>
-            <span style="font-family: 'times new roman', times, serif;">
-                Let's find your air quality data! 🧐</span></strong></span>
-    </p>
-    <p style="text-align: center"><a href="{{ url_for('/dashboard/') }}" button class="btn btn-outline-secondary"
-                                     type="button" style="align-self: center">Get started!</a></p>
-    <p>&nbsp;</p>
-
-
-    <h2>Latest air quality news</h2>
-    {% for article in news['articles'] %}
-        <p><a href="{{ article.url|e }}">{{ article.title|e }}</a></p>
-    {% endfor %}
+    <div class="row">
+        <div class="card-body" style="width: auto">
+        <br><br>
+            <h1><span style="color: #000000; font-size: 20pt;"><strong><span
+                    style="font-family: 'unset'">Latest Air Quality News</span></strong></span></h1>
+            {% for article in news['articles'] %}
+                <p><a style="color: midnightblue; " href="{{ article.url|e }}">{{ article.title|e }}</a><p>
+            {% endfor %}
+        </div>
+    </div>
+    </body>
 {% endblock %}
