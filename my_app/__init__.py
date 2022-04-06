@@ -39,19 +39,6 @@ def create_app(config_class_name):
 
         # Add sample data for the REST API exercise
         u = User.query.first()
-        if u is None:
-            p1 = Profile(username='jo_b', bio='something about me')
-            p2 = Profile(username='fred_s', bio='something interesting')
-            u1 = User(firstname='Jo', lastname='Bloggs', email='jo@bloggs.com', profiles=[p1])
-            u2 = User(firstname='Fred', lastname='Smith', email='fred@smith.com', profiles=[p2])
-            u3 = User(firstname='Santa', lastname='Claus', email='gift@northpole.org')
-            u4 = User(firstname='Robert', lastname='Plant', email='raising_sand@blues.com')
-            u1.set_password('test')
-            u2.set_password('test')
-            u3.set_password('test')
-            u4.set_password('test')
-            db.session.add_all([u1, u2, u3, u4])
-            db.session.commit()
 
 
     from my_app.main.routes import main_bp
