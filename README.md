@@ -1,16 +1,17 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7124964&assignment_repo_type=AssignmentRepo)
 # COMP0034 Coursework 2
+## Techinical information
 ### Repository URL
 [Repository](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1.git)     
 [Dash App video]()
 
-### Additional features implementation
+## Additional features implementation
 Our group has tried to implement 2 additional features to the app, one is the user profiles with moore extensive details with photos, which has been succesfully implemented, and another is the password reset with email integration which failed to work. And below is the explanation of the password reset feature:
 
-#### <li> Brief explain what you were tring to achieve
+### <li> Brief explain what you were tring to achieve
 I was trying to implement a feature to reset the password via the email. By clicking the 'Forgot Your Password? Click to Reset It' link on the login page, it will redirect the user to the reset_password_request page to ask for the user's email address and send a password reset email to that address. In the email it contains the url link to the reset_password page for entering the new password to submit. </li>
 
-#### <li> Explain what isn't working and if you know it, the reason and what you did try and resolve it:
+### <li> Explain what isn't working and if you know it, the reason and what you did try and resolve it:
 The issue is after entering the email address on the reset_password_request page the email fails to send to the user. The functions of sending email in my code are:
 ```
 def send_async_email(current_app, msg):
@@ -71,7 +72,7 @@ def send_async_email(current_app, msg):
 This modified code succesfully solved the import error but still encountered the same RuntimeError. I am sure the bug is in "with current_app.app_context():" "mail.send(msg)" these two lines but have no idea about how to solve it.
 </li> 
 
-#### <li> State what code is in your repo that can be reviewed
+### <li> State what code is in your repo that can be reviewed
 The code for the config can be seen in [config.py](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1/blob/b1bb0c03879f78297c971e949a972ec029c9ed24/my_app/config.py). 
 ```
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
@@ -122,9 +123,25 @@ The template pages are in [template/reset_password_request.html](https://github.
   
 The email content is in [template/email/reset_password.html](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1/blob/b1bb0c03879f78297c971e949a972ec029c9ed24/my_app/templates/email/reset_password.html) in html format and in [template/email/reset_password.txt](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1/blob/b1bb0c03879f78297c971e949a972ec029c9ed24/my_app/templates/email/reset_password.txt) in text format.
 </li> 
-   
+
+
+## Evidence of the appropriate use of software engineering and data science tools
 ### Linter
 Code quality issues have been checked and addressed by [Linter](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1/blob/main/.github/workflows/pylint.yml). 
-
+    
 ### Requirements
 Install [required python packages](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1/blob/203f9688724a23972d00dd80c4bc0d2e73a7a03c/requirements.txt) from the library before running the code.
+    
+### User stories
+The user stories that have been met in this visulization are listed below:
+| No. | Persona | User Stories | Priority |
+| :---: | :---: | --- | :---: |
+| 1 | Commutor | As a website user, I want to be able to run the web app on all versions of Internet Explorer and Netscape browsers so that I can click on any web page to search and use it. | Must have | 
+| 2 | Commutor | As a website user, I want to see a icon or background image (e.g. foggy sky, fresh breeze) related to the air qulity. | Could have |  
+| 3 | Commutor | As a website user, I want to change the avatar in my profile. | Could have |  
+| 4 | Commutor | As a website user, I want to change my password if I accidently forget it. | should have | 
+| 5 | Environmentalist | As a website user, I hope that the content of this app can explain the hazards of having poor air quality to call for everyone to protect the environment. | Could have |    
+| 6 | Environmentalist | As a website user, I want to see the data of different pollutants so that I can find which contributed most to the air pollution. | Must have |      
+| 7 | Developer | As a developer, I want to use a web browser as its user interface. | Must have |   
+| 8 | Developer | As a developer, I want the web design program shall be written using standard python to run on different operation system. | Must have |
+
