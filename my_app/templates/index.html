@@ -2,7 +2,6 @@
 <script src="{{ url_for('static', filename='js/number.js') }}"></script>
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="box"></div>
     <marquee bgcolor=transparent behavior="scroll" direction="auto" height="auto" style="overflow:hidden;"
              scrollamount="3" width="auto" onMouseOver="stop()" onMouseOut="start()">
         <p> {% for article in news['articles'] %}
