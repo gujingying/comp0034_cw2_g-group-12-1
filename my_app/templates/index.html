@@ -30,17 +30,20 @@
                         Both short- and long-term exposure to air pollution can lead to a wide
                         range of diseases, including stroke, chronic obstructive pulmonary
                         disease, trachea, bronchus and lung cancers, aggravated asthma and
-                        lower respiratory infections. According to statistics, its current situation:</span></span></p>
+                        lower respiratory infections. According to statistics, its current situation:
+                    </span></span></p>
                             <marquee bgcolor=transparent behavior="slide" direction="up" height="auto"
                                      style="overflow:hidden;" scrollamount="5" width="auto" onMouseOver="stop()"
                                      onMouseOut="start()">
                                 <p style="text-align: center;">
                 <span style="color: #ff7a69; font-size: 30pt;"><strong>
-                      <span style="font-family: unset">8.8M </strong><span style="color: #ff7a69; font-size: 16pt;"> deaths each year</span> </span></span>
+                      <span style="font-family: unset">8.8M </span></strong><span
+                        style="color: #ff7a69; font-size: 16pt;"> deaths each year</span></span></span>
                                 </p>
                                 <p style="text-align: center;">
                 <span style="color: #faa76e; font-size: 30pt;"><strong>
-                      <span style="font-family: 'unset'">90%</strong>  <span style="color: #faa76e; font-size: 16pt;"> in developing countries </span></span></span>
+                      <span style="font-family: 'unset'">90% </span></strong><span
+                        style="color: #faa76e; font-size: 16pt;"> in developing countries </span></span></span>
 
                                 </p>
                             </marquee>
@@ -50,37 +53,46 @@
             </div>
             <br>
             <br>
-            <br>
-            <br>
-            <p>&nbsp;</p>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-sm-auto">
-            <div class="card-img" style="width: 20rem">
-                <img class="card-img" alt="why air quality image" class=img-responsive width=35%
-                     src="{{ url_for('static', filename='img/why air quality.jpg') }}">
-            </div>
-        </div>
-        <div class="col">
-            <div class="card-body">
-                <br>
-                <br>
-                <p style="text-align: center;">
+
+    <style>
+        .gfg {
+            margin: 0%;
+            position: relative;
+
+        }
+
+        .first-txt {
+            position: absolute;
+            top: 100px;
+            left: 750px;
+        }
+
+        .second-txt {
+            position: absolute;
+            top: 180px;
+            left: 880px;
+        }
+    </style>
+
+    <div class="gfg">
+        <img class="card-img" alt="why air quality image" class=img-responsive width=35% height="300px"
+             src="{{ url_for('static', filename='img/why air quality.jpg') }}">
+        <h3 class="first-txt"><p style="text-align: center;">
             <span style="color: #000000; font-size: 20pt;"><strong>
              <span style="font-family: 'unset'">
                    Let's find your air quality data! 🧐</span></strong></span>
-                </p>
-                <p style="text-align: center"><a href="{{ url_for('/dashboard/') }}" button
-                                                 class="btn btn-warning"
-                                                 type="button" style="align-self: center">Get started!</a></p>
-            </div>
-        </div>
+        </p></h3>
+        <h3 class="second-txt"><p style="text-align: center"><a href="{{ url_for('/dashboard/') }}" button
+                                                                class="btn btn-warning"
+                                                                type="button" style="align-self: center">Get
+            started!</a></p></h3>
     </div>
+
     <div class="row">
         <div class="card-body" style="width: auto">
-        <br><br>
+            <br><br>
             <h1><span style="color: #000000; font-size: 20pt;"><strong><span
                     style="font-family: 'unset'">Latest Air Quality News</span></strong></span></h1>
             {% for article in news['articles'] %}
