@@ -3,7 +3,7 @@
 ## Techinical information
 ### Repository URL
 [Repository](https://github.com/ucl-comp0035/comp0034_cw2_g-group-12-1.git)     
-[Dash App video]()
+[Dash App video](https://www.youtube.com/watch?v=774rWQp11oo)
 
 ## Additional features implementation
 Our group has tried to implement 2 additional features to the app, one is the user profiles with moore extensive details with photos, which has been succesfully implemented, and another is the password reset with email integration which failed to work. And below is the explanation of the password reset feature:
